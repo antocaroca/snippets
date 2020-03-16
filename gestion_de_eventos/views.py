@@ -30,10 +30,8 @@ class Eventos_Del_MesViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly,
                           IsOwnerOrReadOnly]
 
-    @action(detail=True, renderer_classes=[renderers.StaticHTMLRenderer])
-    def highlight(self, request, *args, **kwargs):
-        eventos_del_mes = self.get_object()
-        return Response(eventos_del_mes)
+    
+    
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)

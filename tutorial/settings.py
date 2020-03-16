@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
-    'snippets.apps.SnippetsConfig',
+    'gestion_de_eventos.apps.Gestion_De_EventosConfig',
 ]
 
 MIDDLEWARE = [
