@@ -1,5 +1,5 @@
-from .models import Snippet
-from .serializers import SnippetSerializer
+from .models import Eventos_Del_Mes
+from .serializers import Eventos_Del_MesSerializer
 from rest_framework import generics
 from django.contrib.auth.models import User
 from .serializers import UserSerializer
@@ -19,22 +19,21 @@ from rest_framework.response import Response
 
 
 
-class SnippetViewSet(viewsets.ModelViewSet):
+class Eventos_Del_MesViewSet(viewsets.ModelViewSet):
     """
     This viewset automatically provides `list`, `create`, `retrieve`,
     `update` and `destroy` actions.
 
-    Additionally we also provide an extra `highlight` action.
     """
-    queryset = Snippet.objects.all()
-    serializer_class = SnippetSerializer
+    queryset = Eventos_Del_Mes.objects.all()
+    serializer_class = Eventos_Del_MesSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly,
                           IsOwnerOrReadOnly]
 
     @action(detail=True, renderer_classes=[renderers.StaticHTMLRenderer])
     def highlight(self, request, *args, **kwargs):
-        snippet = self.get_object()
-        return Response(snippet.highlighted)
+        eventos_del_mes = self.get_object()
+        return Response(eventos_del_mes)
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
