@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class ThreatHuntingConfig(AppConfig):
+class Threat_HuntingConfig(AppConfig):
     name = 'threat_hunting'

@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class GestionDeAmenazasConfig(AppConfig):
+class Gestion_De_AmenazasConfig(AppConfig):
     name = 'gestion_de_amenazas'
