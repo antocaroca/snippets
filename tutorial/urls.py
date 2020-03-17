@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('gestion_de_eventos/', include('gestion_de_eventos.urls')),
     path('gestion_de_amenazas/', include('gestion_de_amenazas.urls')),
+    path('threat_hunting/', include('threat_hunting.urls')),
     path('api-auth/', include('rest_framework.urls')),
 ]
 
