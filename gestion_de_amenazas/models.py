@@ -1,5 +1,7 @@
 from django.db import models
+from django.forms import ModelForm
 from pygments.formatters.html import HtmlFormatter
+from django.urls import reverse
 
 CATEGORIA_AMENAZAS = (
     ("Gestionadas", "Gestionadas"), 
@@ -22,22 +24,42 @@ TIPO_AMENAZAS = (
     ("Phishing", "Phishing"),  
 )
 
+MES = (
+    ("Enero", "Enero"), 
+    ("Febrero", "Febrero"), 
+    ("Marzo", "Marzo"), 
+    ("Abril", "Abril"), 
+    ("Mayo", "Mayo"), 
+    ("Junio", "Junio"), 
+    ("Julio", "Julio"), 
+    ("Agosto", "Agosto"), 
+    ("Septimbre", "Septimbre"), 
+    ("Octubre", "Octubre"), 
+    ("Noviembre", "Noviembre"), 
+    ("Diciembre", "Diciembre"), 
+)
+
 class Amenazas_Del_Mes(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     categoria = models.CharField(choices=CATEGORIA_AMENAZAS, max_length=100, default='Gestionadas')
     criticidad = models.CharField(choices=CRITICIDAD_AMENAZAS, max_length=100, default='Crítico')
     tipo = models.CharField(choices=TIPO_AMENAZAS, max_length=100, default='Malware')
     cantidad = models.PositiveIntegerField(blank=True, null=True)
-    mes = models.IntegerField(blank=True, null=True)
-    año = models.PositiveIntegerField(blank=True, null=True)
+    mes = models.CharField(choices=MES, max_length=100)
+    año = models.PositiveSmallIntegerField(blank=True, null=True)
     owner = models.ForeignKey('auth.User', related_name='amenazas_del_mes', on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['created']
 
     def save(self, *args, **kwargs):
-        
         super(Amenazas_Del_Mes, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.categoria
+  
+    def get_absolute_url(self):
+        return reverse('amenazas_del_mes')
 
 class Alerta_Amenaza(models.Model):
     created = models.DateTimeField(auto_now_add=True)
@@ -45,8 +67,8 @@ class Alerta_Amenaza(models.Model):
     criticidad = models.CharField(choices=CRITICIDAD_AMENAZAS, max_length=100, default='Crítico')
     descripcion = models.TextField(blank=True, null=True)
     icono =  models.ImageField(upload_to='gestion_de_amenazas/alerta_amenaza/', null=True, blank=True)
-    mes = models.PositiveIntegerField(blank=True, null=True)
-    año = models.PositiveIntegerField(blank=True, null=True)
+    mes = models.CharField(choices=MES, max_length=100)
+    año = models.PositiveSmallIntegerField(blank=True, null=True)
     owner = models.ForeignKey('auth.User', related_name='alerta_amenaza', on_delete=models.CASCADE)
 
     class Meta:
@@ -59,6 +81,12 @@ class Alerta_Amenaza(models.Model):
         self.icono.delete()
         super().delete(*args, **kwargs)
 
+    def __str__(self):
+        return self.categoria
+  
+    def get_absolute_url(self):
+        return reverse('amenazas_del_mes')
+
 class Tendencia_Amenaza(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     titulo = models.CharField(max_length=100)
@@ -68,8 +96,8 @@ class Tendencia_Amenaza(models.Model):
     imagen_1 =  models.ImageField(upload_to='gestion_de_amenazas/tendencia_amenaza/', null=True, blank=True)
     imagen_2 =  models.ImageField(upload_to='gestion_de_amenazas/tendencia_amenaza/', null=True, blank=True)
     imagen_3 =  models.ImageField(upload_to='gestion_de_amenazas/tendencia_amenaza/', null=True, blank=True)
-    mes = models.PositiveIntegerField(blank=True, null=True)
-    año = models.PositiveIntegerField(blank=True, null=True)
+    mes = models.CharField(choices=MES, max_length=100)
+    año = models.PositiveSmallIntegerField(blank=True, null=True)
     owner = models.ForeignKey('auth.User', related_name='tendencia_Amenaza', on_delete=models.CASCADE)
 
     class Meta:
@@ -84,14 +112,20 @@ class Tendencia_Amenaza(models.Model):
         self.imagen_3.delete()
         super().delete(*args, **kwargs)
 
+    def __str__(self):
+        return self.titulo
+  
+    def get_absolute_url(self):
+        return reverse('amenazas_del_mes')
+
 class Grafico_Lineas_Tendencia_Amenazas(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     titulo = models.CharField(max_length=100, blank=True, null=True)
     escala = models.PositiveIntegerField(blank=True, null=True)
     indicador = models.CharField(max_length=100, blank=True, null=True)
     puntos = models.PositiveIntegerField(blank=True, null=True)
-    mes = models.PositiveIntegerField(blank=True, null=True)
-    año = models.PositiveIntegerField(blank=True, null=True)
+    mes = models.CharField(choices=MES, max_length=100)
+    año = models.PositiveSmallIntegerField(blank=True, null=True)
     owner = models.ForeignKey('auth.User', related_name='Grafico_lineas_tendencia_amenazas', on_delete=models.CASCADE)
 
     class Meta:
@@ -99,3 +133,9 @@ class Grafico_Lineas_Tendencia_Amenazas(models.Model):
 
     def save(self, *args, **kwargs):
         super(Grafico_Lineas_Tendencia_Amenazas, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.titulo
+  
+    def get_absolute_url(self):
+        return reverse('amenazas_del_mes')

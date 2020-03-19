@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    
+    <h5> Eliminar alerta amenaza </h5>
+            
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <h5 class="">Estas seguro de eliminar: alerta amenaza
+                        <span class="">
+                            "{{ object.categoria }}"</br>
+                            {{ object.criticidad }}</br>
+                            {{ object.descripcion }}"
+                        </span>?
+                    </h5>
+                    </br>
+                    <button class="btn btn-danger text-white ml-2" type="submit">
+                        Confirmar
+                    </button>
+                </form>
+            </div>     
+        </div>
+        </br>
+    
+</div>
+{% endblock content %}

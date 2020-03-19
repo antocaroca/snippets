@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<h2 class="p-2">amenazas del mes list</h2>
+<a href="{% url 'amenazas_del_mes_crear' %}"><button class="btn btn-info mb-2">Crear amenaza</button></a>
+</br>
+<hr>
+   {% for amenaza in amenazas_del_mes %}
+        <a href="{% url 'amenazas_del_mes_editar' amenaza.pk %}">editar</a> |
+        <a href="{% url 'amenazas_del_mes_eliminar' amenaza.pk %}">eliminar</a>
+    </br>
+        categoria: {{ amenaza.categoria }}</br>
+        criticidad: {{ amenaza.criticidad }}</br>
+        tpo: {{ amenaza.tipo }}</br>
+        cantidad: {{ amenaza.cantidad }}</br>
+        mes: {{ amenaza.mes }}</br>
+        año: {{ amenaza.año }}</br>
+        
+        <hr>
+   {% endfor %}
+    <h2 class="p-2">alerta amenaza list</h2>
+    <a href="{% url 'alerta_amenaza_crear' %}"><button class="btn btn-info mb-2">Crear alerta</button></a>
+    </br>
+    <hr>
+   {% for alerta in alerta_amenazas %}
+        <a href="{% url 'alerta_amenaza_editar' alerta.pk %}">editar</a> |
+        <a href="{% url 'alerta_amenaza_eliminar' alerta.pk %}">eliminar</a>
+    </br>
+        categoria: {{ alerta.categoria }}</br>
+        criticidad: {{ alerta.criticidad }}</br>
+        descripcion: {{ alerta.descripcion }}</br>
+        icono: {{ alerta.icono }}</br>
+        mes: {{ alerta.mes }}</br>
+        año: {{ alerta.año }}</br>
+        
+        <hr>
+   {% endfor %}
+    
+{% endblock %}

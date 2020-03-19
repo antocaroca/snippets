@@ -17,6 +17,13 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
+from gestion_de_amenazas.forms import Amenazas_Del_MesForm, Alerta_AmenazaForm, Tendencia_AmenazaForm, Grafico_Lineas_Tendencia_AmenazasForm
+
+from django.shortcuts import render, redirect
+from django.views.generic import CreateView, UpdateView, DeleteView, ListView
+from django.urls import reverse_lazy
+
+############################################ ViewSets #################################################
 
 class Amenazas_Del_MesViewSet(viewsets.ModelViewSet):
     """
@@ -81,3 +88,66 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+################################### Views #################################
+
+class Amenazas_Del_MesCreateView(CreateView):
+    model = Amenazas_Del_Mes
+    template_name = "crear_amenazas_del_mes.html"
+    form_class = Amenazas_Del_MesForm
+    success_url = reverse_lazy('amenazas_del_mes')
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+class Amenazas_Del_MesUpdateView(UpdateView):
+    model = Amenazas_Del_Mes
+    fields = ('categoria', 'criticidad', 'tipo', 'cantidad', 'mes', 'año', 'owner')
+    template_name = 'editar_amenazas_del_mes.html'
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+class Amenazas_Del_MesDeleteView(DeleteView):
+    model = Amenazas_Del_Mes
+    template_name = "eliminar_amenazas_del_mes.html"
+    success_url = reverse_lazy('amenazas_del_mes')
+
+
+
+#####  Alerta_Amenaza
+
+class Alerta_AmenazaCreateView(CreateView):
+    model = Alerta_Amenaza
+    template_name = "crear_alerta_amenaza.html"
+    form_class = Alerta_AmenazaForm
+    success_url = reverse_lazy('amenazas_del_mes')
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+class Alerta_AmenazaUpdateView(UpdateView):
+    model = Alerta_Amenaza
+    fields = ('categoria', 'criticidad', 'descripcion', 'icono', 'mes', 'año', 'owner')
+    template_name = 'editar_alerta_amenaza.html'
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+class Alerta_AmenazaDeleteView(DeleteView):
+    model = Alerta_Amenaza
+    template_name = "eliminar_alerta_amenaza.html"
+    success_url = reverse_lazy('amenazas_del_mes')
+
+class Amenazas_Del_MesListView(ListView):
+    model = Amenazas_Del_Mes
+    template_name = 'listar_amenazas_del_mes.html'
+    
+
+    #aca se muestra el contexto de  Amenazas_Del_Mes y alerta_amenaza
+    def get_context_data(self, **kwargs):
+        context = super(Amenazas_Del_MesListView, self).get_context_data(**kwargs)
+        context['amenazas_del_mes'] = Amenazas_Del_Mes.objects.all()  
+        context['alerta_amenazas'] = Alerta_Amenaza.objects.all()  
+
+        return context
