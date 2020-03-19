@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}my site{% endblock title %}
+{% block content %}
+<div class="">
+    <h3>Eventos del mes</h3>
+    <a href="{% url 'eventos_del_mes_crear' %}"><button class="btn btn-info mb-2">Crear evento</button></a>
+      {% for evento in eventos_del_mes %}
+            <div class="card">
+                <div class="card-body "> 
+                    <a href="{% url 'eventos_del_mes_editar' evento.pk %}">editar</a> |
+                    <a href="{% url 'eventos_del_mes_eliminar' evento.pk %}">borrar</a>
+                    <ul>                                                          
+                        <li> evento n 1: {{ evento.evento_n1 }}</li>
+                        <li>evento n 2: {{ evento.evento_n2 }}</li>  
+                        <li>evento n 3: {{ evento.evento_n3 }}</li> 
+                        <li>evento pro: {{ evento.evento_pro }} </li> 
+                        <li>mes: {{ evento.mes }} </li>
+                        <li>año: {{ evento.año }}  </li>
+                        <li>evento gestinado por entel: {{ evento.evento_gestionado }} </li>
+                        <li>evento no gestionado: {{ evento.evento_no_gestionado }} </li>
+                    </ul>                
+                </div>            
+            </div>   
+    
+      {% endfor %}
+</div>
+
+<div class="">
+    <h3 class="py-2">Data Source</h3>
+    <a href="{% url 'data_source_crear' %}"><button class="btn btn-info mb-2">Crear data source</button></a>
+    {% for data in data_source %}
+          <div class="card">
+              <div class="card-body ">  
+                <a href="{% url 'data_source_editar' data.pk %}">editar</a> |
+                <a href="{% url 'data_source_eliminar' data.pk %}">borrar</a>
+                  <ul>
+                      <li>nombre: {{ data.nombre }}</li>
+                      <li>estado: {{ data.estado }}</li>
+                      <li>ip: {{ data.ip}}</li>
+                      <li>mes: {{ data.mes }}</li>
+                      <li>año: {{ data.año }}</li>
+                  </ul>                                                                                        
+              </div>            
+          </div>   
+  
+    {% endfor %}
+</div>
+    
+{% endblock %}

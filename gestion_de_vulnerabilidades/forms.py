@@ -2,9 +2,6 @@ from django import forms
 from gestion_de_vulnerabilidades.models import Vulnerabilidad
 
 class VulnerabilidadForm(forms.ModelForm):
-    cantidad_nivel_4 = forms.IntegerField(min_value=0) 
-    cantidad_nivel_3 = forms.IntegerField(min_value=0) 
-    evolucion_criticas_1 = forms.IntegerField(min_value=0) 
     
     class Meta: 
         model =  Vulnerabilidad

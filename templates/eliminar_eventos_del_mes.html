@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    
+    <h5> Eliminar eventos del mes</h5>
+            
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <h5 class="">Estas seguro de eliminar eventos del mes
+                        <span class="">
+                            "{{ object }}"
+                            
+                        </span>?
+                    </h5>
+                    </br>
+                    <button class="btn btn-danger text-white ml-2" type="submit">
+                        Confirmar
+                    </button>
+                </form>
+            </div>     
+        </div>
+        </br>
+    
+</div>
+{% endblock content %}
