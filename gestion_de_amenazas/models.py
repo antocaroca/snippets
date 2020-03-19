@@ -28,7 +28,7 @@ class Amenazas_Del_Mes(models.Model):
     criticidad = models.CharField(choices=CRITICIDAD_AMENAZAS, max_length=100, default='Crítico')
     tipo = models.CharField(choices=TIPO_AMENAZAS, max_length=100, default='Malware')
     cantidad = models.PositiveIntegerField(blank=True, null=True)
-    mes = models.PositiveIntegerField(blank=True, null=True)
+    mes = models.IntegerField(blank=True, null=True)
     año = models.PositiveIntegerField(blank=True, null=True)
     owner = models.ForeignKey('auth.User', related_name='amenazas_del_mes', on_delete=models.CASCADE)
 

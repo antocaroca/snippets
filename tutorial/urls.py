@@ -24,6 +24,7 @@ urlpatterns = [
     path('gestion_de_eventos/', include('gestion_de_eventos.urls')),
     path('gestion_de_amenazas/', include('gestion_de_amenazas.urls')),
     path('threat_hunting/', include('threat_hunting.urls')),
+    path('gestion_de_vulnerabilidades/', include('gestion_de_vulnerabilidades.urls')),
     path('api-auth/', include('rest_framework.urls')),
 ]
 

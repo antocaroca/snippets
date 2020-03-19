@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    
+    <h5> Eliminar vulnerabilidad</h5>
+            
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <h5 class="gray">Estas seguro de eliminar vulnerabilidad
+                        <span class="regularOrange">
+                            "{{ vulnerabilidad }}"</br>
+                            fecha inicio: {{  vulnerabilidad.fecha_inicio }}</br>
+                            fecha fin: {{  vulnerabilidad.fecha_fin }}
+                        </span>?
+                    </h5>
+                    </br>
+                    <button class="btn btn-danger text-white ml-2" type="submit">
+                        Confirmar
+                    </button>
+                </form>
+            </div>     
+        </div>
+        </br>
+    
+</div>
+{% endblock content %}

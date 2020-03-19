@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="p-2">Crear vulnerabilidad</h2>
+<form method='post'>
+    {% csrf_token %}
+    {{ form.as_p }}</br>
+    <button type="submit" class="btn btn-primary text-white">Crear</button>
+</form>
+{% endblock %}

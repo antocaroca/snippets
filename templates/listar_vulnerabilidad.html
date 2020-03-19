@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<h2 class="p-2">vulnerabilidad list</h2>
+
+   {% for vulnerabilidad in vulnerabilidad_lista %}
+        <a href="{% url 'vulnerabilidad_detalle' vulnerabilidad.pk %}">fecha inicio: {{ vulnerabilidad.fecha_inicio }}</a></br>
+        fecha fin: {{ vulnerabilidad.fecha_fin}}</br>
+        tipo escaner: {{ vulnerabilidad }}</br>
+        direcciones ip declaradas: {{ vulnerabilidad.direcciones_ip_declaradas }}</br>
+        direcciones ip con respuesta: {{ vulnerabilidad.direcciones_ip_con_respuesta }}</br>
+        direcciones ip sin respuesta:{{ vulnerabilidad.direcciones_ip_sin_respuesta }}</br>
+        cantidad nivel 4: {{ vulnerabilidad.cantidad_nivel_4 }}</br>
+        cantidad nivel 3:{{ vulnerabilidad.cantidad_nivel_3 }}</br>
+        evolucion fecha 1:{{ vulnerabilidad.evolucion_fecha_1 }}</br>
+        evolucion fecha 2:{{ vulnerabilidad.evolucion_fecha_2 }}</br>
+        evolucion criticas 1:{{ vulnerabilidad.evolucion_criticas_1 }}</br>
+        evolucion criticas 2:{{ vulnerabilidad.evolucion_criticas_2 }}</br>
+        evolucion altas 1:{{ vulnerabilidad.evolucion_altas_1 }}</br>
+        evolucion altas 2:{{ vulnerabilidad.evolucion_altas_2 }}</br>
+        evolucion medias 1:{{ vulnerabilidad.evolucion_medias_1 }}</br>
+        evolucion medias 2:{{ vulnerabilidad.evolucion_medias_2 }}</br>
+        evolucion bajas 1:{{ vulnerabilidad.evolucion_bajas_1 }}</br>
+        evolucion bajas 2:{{ vulnerabilidad.evolucion_bajas_2 }}</br>
+        estado nuevas: {{ vulnerabilidad.estado_nuevas }}</br>
+        estado no detectadas:{{ vulnerabilidad.estado_no_detectadas }}</br>
+        estado persistentes:{{ vulnerabilidad.estado_persistentes }}</br>
+        
+        <hr>
+   {% endfor %}
+    
+{% endblock %}

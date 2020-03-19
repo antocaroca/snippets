@@ -30,7 +30,7 @@ class Data_Source(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     nombre = models.CharField(max_length=100, blank=True, null=True)
     estado = models.CharField(choices=ESTADO_AMENAZAS, max_length=100, default='Integrado')
-    ip = models.CharField(max_length=100, blank=True, null=True)
+    ip = models.GenericIPAddressField(blank=True, null=True)
     mes = models.PositiveIntegerField(blank=True, null=True)
     año = models.PositiveIntegerField(blank=True, null=True)
     owner = models.ForeignKey('auth.User', related_name='data_source', on_delete=models.CASCADE)
