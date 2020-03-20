@@ -23,6 +23,9 @@ from django.shortcuts import render, redirect
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 from django.urls import reverse_lazy
 
+#############################################################################################
+###################                       ViewSets                     ######################
+#############################################################################################
 
 class Eventos_Del_MesViewSet(viewsets.ModelViewSet):
     """
@@ -61,6 +64,10 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+#############################################################################################
+###################                       Views                        ######################
+#############################################################################################
+
 class Eventos_Del_MesCreateView(CreateView):
     model = Eventos_Del_Mes
     template_name = "crear_eventos_del_mes.html"
@@ -84,6 +91,21 @@ class Eventos_Del_MesDeleteView(DeleteView):
     template_name = "eliminar_eventos_del_mes.html"
     success_url = reverse_lazy('eventos_del_mes')
 
+class Eventos_Del_MesListView(ListView):
+    model = Eventos_Del_Mes
+    template_name = 'eventos_del_mes_listar.html'
+    context_object_name = 'eventos_del_mes'
+
+    #aca se muestra el contexto de  Eventos_Del_Mes y data_source
+    def get_context_data(self, **kwargs):
+        context = super(Eventos_Del_MesListView, self).get_context_data(**kwargs)
+        context['eventos_del_mes'] = Eventos_Del_Mes.objects.all()  
+        context['data_source'] = Data_Source.objects.all()  
+
+        return context
+
+####################### data source ##################################
+
 class Data_SourceCreateView(CreateView):
     model = Data_Source
     template_name = "crear_data_source.html"
@@ -105,16 +127,3 @@ class Data_SourceDeleteView(DeleteView):
     model = Data_Source
     template_name = "eliminar_data_source.html"
     success_url = reverse_lazy('eventos_del_mes')
-
-class Eventos_Del_MesListView(ListView):
-    model = Eventos_Del_Mes
-    template_name = 'eventos_del_mes_listar.html'
-    context_object_name = 'eventos_del_mes'
-
-    #aca se muestra el contexto de  Eventos_Del_Mes y data_source
-    def get_context_data(self, **kwargs):
-        context = super(Eventos_Del_MesListView, self).get_context_data(**kwargs)
-        context['eventos_del_mes'] = Eventos_Del_Mes.objects.all()  
-        context['data_source'] = Data_Source.objects.all()  
-
-        return context

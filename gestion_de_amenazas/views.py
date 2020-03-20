@@ -23,7 +23,10 @@ from django.shortcuts import render, redirect
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 from django.urls import reverse_lazy
 
-############################################ ViewSets #################################################
+#############################################################################################
+###################                       ViewSets                     ######################
+#############################################################################################
+
 
 class Amenazas_Del_MesViewSet(viewsets.ModelViewSet):
     """
@@ -89,7 +92,11 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-################################### Views #################################
+#############################################################################################
+###################                       Views                        ######################
+#############################################################################################
+
+####################### Amenazas_Del_Mes ##################################
 
 class Amenazas_Del_MesCreateView(CreateView):
     model = Amenazas_Del_Mes

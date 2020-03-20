@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<h2 class="p-2">Hallazgo list</h2>
+<a href="{% url 'hallazgo_crear' %}"><button class="btn btn-info mb-2">Crear hallazgo</button></a>
+</br>
+<hr>
+   {% for hallazgo in lista_hallazgo %}
+        <a href="{% url 'hallazgo_editar' hallazgo.pk %}">editar</a> |
+        <a href="{% url 'hallazgo_eliminar' hallazgo.pk %}">eliminar</a>
+    </br>
+        codigo: {{ hallazgo.codigo }}</br>
+        nombre caso: {{ hallazgo.nombre_caso }}</br>
+        criticidad: {{ hallazgo.criticidad }}</br>
+        estado actual: {{ hallazgo.estado_actual }}</br>
+        fecha ultima retroalimentacion: {{ hallazgo.fecha_ultima_retroalimentacion }}</br>
+        mes: {{ hallazgo.mes }}</br>
+        año: {{ hallazgo.año }}</br>
+        
+        <hr>
+   {% endfor %}
+{% endblock %}
