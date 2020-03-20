@@ -35,6 +35,8 @@ class Vulnerabilidad(models.Model):
 
     class Meta:
         ordering = ['created']
+        verbose_name = 'Vulnerabilidad'
+        verbose_name_plural = 'Vulnerabilidades'
 
     def save(self, *args, **kwargs):
         super(Vulnerabilidad, self).save(*args, **kwargs)

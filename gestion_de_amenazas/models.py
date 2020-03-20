@@ -51,6 +51,8 @@ class Amenazas_Del_Mes(models.Model):
 
     class Meta:
         ordering = ['created']
+        verbose_name = 'Amenazas Del Mes'
+        verbose_name_plural = 'Amenazas Del Mes'
 
     def save(self, *args, **kwargs):
         super(Amenazas_Del_Mes, self).save(*args, **kwargs)
@@ -130,6 +132,8 @@ class Grafico_Lineas_Tendencia_Amenazas(models.Model):
 
     class Meta:
         ordering = ['created']
+        verbose_name = 'Grafico Lineas Tendencia Amenazas'
+        verbose_name_plural = 'Grafico Lineas Tendencia Amenazas'
 
     def save(self, *args, **kwargs):
         super(Grafico_Lineas_Tendencia_Amenazas, self).save(*args, **kwargs)

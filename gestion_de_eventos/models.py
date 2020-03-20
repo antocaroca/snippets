@@ -38,6 +38,8 @@ class Eventos_Del_Mes(models.Model):
 
     class Meta:
         ordering = ['created']
+        verbose_name = 'Eventos Del Mes'
+        verbose_name_plural = 'Eventos Del Mes'
 
     def save(self, *args, **kwargs):
         super(Eventos_Del_Mes, self).save(*args, **kwargs)
