@@ -30,7 +30,11 @@
         categoria: {{ alerta.categoria }}</br>
         criticidad: {{ alerta.criticidad }}</br>
         descripcion: {{ alerta.descripcion }}</br>
-        icono: {{ alerta.icono }}</br>
+        {% if alerta.icono %}
+        <span>icono:</span><img src="{{ alerta.icono.url }}" alt="{{ alerta.categoria }}" style="width:100px;"/></br>
+            {% else %}
+        <span class="text-muted">Sin foto</span></br>
+        {% endif %}
         mes: {{ alerta.mes }}</br>
         año: {{ alerta.año }}</br>
         
