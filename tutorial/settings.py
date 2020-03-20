@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'gestion_de_amenazas.apps.Gestion_De_AmenazasConfig',
     'gestion_de_vulnerabilidades.apps.Gestion_De_VulnerabilidadesConfig',
     'threat_hunting.apps.Threat_HuntingConfig',
+    'home.apps.HomeConfig',
 ]
 
 MIDDLEWARE = [

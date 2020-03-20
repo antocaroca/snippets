@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>HOME</h2>
+
+<h4>Acceso API en Django rest framework</h4>
+<ul>
+    <li><a href="http://127.0.0.1:8000/gestion_de_eventos/" target="blank">Gestión de eventos</a></li>
+    <li><a href="http://127.0.0.1:8000/gestion_de_amenazas/" target="blank">Gestión de amenazas</a></li>
+    <li><a href="http://127.0.0.1:8000/gestion_de_vulnerabilidades/" target="blank">Gestión de vulnerabilidades</a></li>
+    <li><a href="http://127.0.0.1:8000/threat_hunting/" target="blank">Threat Hunting</a></li>
+</ul>
+
+<h4>Acceso Formularios en Django</h4>
+<ul>
+    <li><a href="{% url 'eventos_del_mes' %}" target="blank">Gestión de eventos</a> 
+    </br> eventos del mes y data source</li>
+    <li><a href="{% url 'amenazas_del_mes' %}" target="blank">Gestión de amenazas</a></li>
+    alerta amenazas, amenazas del mes, grafico lineas tendencia amenazas, tendencia amenazas
+    <li><a href="{% url 'vulnerabilidad_listar' %}" target="blank">Gestión de vulnerabilidades</a></li>
+    vulnerabilidad
+    <li><a href="{% url 'hallazgo_listar' %}" target="blank">Threat Hunting</a></li>
+    Hallazgo
+</ul>
+{% endblock %}
