@@ -113,9 +113,25 @@ class Amenazas_Del_MesDeleteView(DeleteView):
     template_name = "eliminar_amenazas_del_mes.html"
     success_url = reverse_lazy('amenazas_del_mes')
 
+class Amenazas_Del_MesListView(ListView):
+    model = Amenazas_Del_Mes
+    template_name = 'listar_amenazas_del_mes.html'
+    
+    """
+    This view method provides the context to list the objects of
+    Amenazas_Del_Mes, Alerta_Amenaza, Tendencia_Amenaza
+    """
 
+    def get_context_data(self, **kwargs):
+        context = super(Amenazas_Del_MesListView, self).get_context_data(**kwargs)
+        context['amenazas_del_mes'] = Amenazas_Del_Mes.objects.all()  
+        context['alerta_amenazas'] = Alerta_Amenaza.objects.all() 
+        context['tendencia_amenaza'] = Tendencia_Amenaza.objects.all()  
+        context['grafico_tendencia'] = Grafico_Lineas_Tendencia_Amenazas.objects.all()  
 
-#####  Alerta_Amenaza
+        return context
+
+###########################  Alerta_Amenaza  ######################################
 
 class Alerta_AmenazaCreateView(CreateView):
     model = Alerta_Amenaza
@@ -139,15 +155,50 @@ class Alerta_AmenazaDeleteView(DeleteView):
     template_name = "eliminar_alerta_amenaza.html"
     success_url = reverse_lazy('amenazas_del_mes')
 
-class Amenazas_Del_MesListView(ListView):
-    model = Amenazas_Del_Mes
-    template_name = 'listar_amenazas_del_mes.html'
-    
+###########################  Tendencia_Amenaza  ######################################
 
-    #aca se muestra el contexto de  Amenazas_Del_Mes y alerta_amenaza
-    def get_context_data(self, **kwargs):
-        context = super(Amenazas_Del_MesListView, self).get_context_data(**kwargs)
-        context['amenazas_del_mes'] = Amenazas_Del_Mes.objects.all()  
-        context['alerta_amenazas'] = Alerta_Amenaza.objects.all()  
+class Tendencia_AmenazaCreateView(CreateView):
+    model = Tendencia_Amenaza
+    template_name = "crear_tendencia_amenaza.html"
+    form_class = Tendencia_AmenazaForm
+    success_url = reverse_lazy('amenazas_del_mes')
 
-        return context
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+class Tendencia_AmenazaUpdateView(UpdateView):
+    model = Tendencia_Amenaza
+    fields = ('titulo', 'descripcion_1', 'descripcion_2', 'descripcion_3', 'imagen_1', 'imagen_2', 'imagen_3', 'mes', 'año', 'owner')
+    template_name = 'editar_tendencia_amenaza.html'
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+class Tendencia_AmenazaDeleteView(DeleteView):
+    model = Tendencia_Amenaza
+    template_name = "eliminar_tendencia_amenaza.html"
+    success_url = reverse_lazy('amenazas_del_mes')
+
+###########################  Grafico_Lineas_Tendencia_Amenazas  #############################
+
+class Grafico_Lineas_Tendencia_AmenazasCreateView(CreateView):
+    model = Grafico_Lineas_Tendencia_Amenazas
+    template_name = "crear_grafico_lineas_tendencia_amenaza.html"
+    form_class = Grafico_Lineas_Tendencia_AmenazasForm
+    success_url = reverse_lazy('amenazas_del_mes')
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+class Grafico_Lineas_Tendencia_AmenazasUpdateView(UpdateView):
+    model = Grafico_Lineas_Tendencia_Amenazas
+    fields = ('titulo', 'escala', 'indicador', 'puntos', 'mes', 'año', 'owner')
+    template_name = 'editar_grafico_lineas_tendencia_amenaza.html'
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+class Grafico_Lineas_Tendencia_AmenazasDeleteView(DeleteView):
+    model = Grafico_Lineas_Tendencia_Amenazas
+    template_name = "eliminar_grafico_lineas_tendencia_amenaza.html"
+    success_url = reverse_lazy('amenazas_del_mes')

@@ -38,7 +38,58 @@
         mes: {{ alerta.mes }}</br>
         año: {{ alerta.año }}</br>
         
-        <hr>
+        
    {% endfor %}
+   <hr>
+   <h2 class="p-2">tendencia amenaza list</h2>
+   <a href="{% url 'tendencia_amenaza_crear' %}"><button class="btn btn-info mb-2">Crear tendencia</button></a>
+   </br>
+   <hr>
+
+    {% for tendencia in tendencia_amenaza %}
+    <a href="{% url 'tendencia_amenaza_editar' tendencia.pk %}">editar</a> |
+    <a href="{% url 'tendencia_amenaza_eliminar' tendencia.pk %}">eliminar</a>
+    </br>
+    titulo: {{ tendencia.titulo }}</br>
+    descrpción 1: {{ tendencia.descripcion_1 }}</br>
+    descripcion 2: {{ tendencia.descripcion_2 }}</br>
+    descripcion 3: {{ tendencia.descripcion_3 }}</br>
+    {% if tendencia.imagen_1 %}
+    <span>imagen 1:</span><img class="p-2" src="{{ tendencia.imagen_1.url }}" alt="{{ tendencia.titulo }}" style="width:100px;"/></br>
+        {% else %}
+    <span class="text-muted">Sin imagen</span></br>
+    {% endif %}
+    {% if tendencia.imagen_2 %}
+    <span>imagen 2:</span><img class="p-2" src="{{ tendencia.imagen_2.url }}" alt="{{ tendencia.titulo }}" style="width:100px;"/></br>
+        {% else %}
+    <span class="text-muted">Sin imagen</span></br>
+    {% endif %}
+    {% if tendencia.imagen_3 %}
+    <span>imagen 3:</span><img class="p-2" src="{{ tendencia.imagen_3.url }}" alt="{{ tendencia.titulo }}" style="width:100px;"/></br>
+        {% else %}
+    <span class="text-muted">Sin imagen</span></br>
+    {% endif %}
+    mes: {{ tendencia.mes }}</br>
+    año: {{ tendencia.año }}</br>
+    <hr>
+    {% endfor %}
+
+   <h2 class="p-2"> gráfico lineas tendencia amenaza list</h2>
+   <a href="{% url 'grafico_lineas_tendencia_amenazas_crear' %}"><button class="btn btn-info mb-2">Crear grafico tendencia amenazas</button></a>
+   </br>
+   <hr>
+
+    {% for grafico in grafico_tendencia %}
+    <a href="{% url 'grafico_lineas_tendencia_amenazas_editar' grafico.pk %}">editar</a> |
+    <a href="{% url 'grafico_lineas_tendencia_amenazas_eliminar' grafico.pk %}">eliminar</a>
+    </br>
+    titulo: {{ grafico.titulo }}</br>
+    escala: {{ grafico.escala }}</br>
+    indicador: {{ grafico.indicador }}</br>
+    puntos: {{ grafico.puntos }}</br>
+    mes: {{ grafico.mes }}</br>
+    año: {{ grafico.año }}</br>
+    <hr>
+    {% endfor %}
     
 {% endblock %}
