@@ -5,22 +5,22 @@ class Amenazas_Del_MesForm(forms.ModelForm):
     
     class Meta: 
         model =  Amenazas_Del_Mes
-        fields = ('categoria', 'criticidad', 'tipo', 'cantidad', 'mes', 'año' ,'owner')
+        fields = ('categoria', 'criticidad', 'tipo', 'cantidad', 'mes', 'año')
 
 class Alerta_AmenazaForm(forms.ModelForm):
     
     class Meta: 
         model =  Alerta_Amenaza
-        fields = ('categoria', 'criticidad', 'descripcion', 'icono', 'mes', 'año' ,'owner', )
+        fields = ('categoria', 'criticidad', 'descripcion', 'icono', 'mes', 'año')
 
 class Tendencia_AmenazaForm(forms.ModelForm):
     
     class Meta: 
         model =  Tendencia_Amenaza
-        fields = ('titulo', 'descripcion_1', 'descripcion_2', 'descripcion_3', 'imagen_1', 'imagen_2', 'imagen_3', 'mes', 'año' ,'owner', )
+        fields = ('titulo', 'descripcion_1', 'descripcion_2', 'descripcion_3', 'imagen_1', 'imagen_2', 'imagen_3', 'mes', 'año')
 
 class Grafico_Lineas_Tendencia_AmenazasForm(forms.ModelForm):
     
     class Meta: 
         model =  Grafico_Lineas_Tendencia_Amenazas
-        fields = ('titulo', 'escala', 'indicador', 'puntos', 'mes', 'año' ,'owner')
+        fields = ('titulo', 'escala', 'indicador', 'puntos', 'mes', 'año')

@@ -2,9 +2,6 @@ from .models import Vulnerabilidad
 from .serializers import VulnerabilidadSerializer
 from rest_framework import generics
 from django.contrib.auth.models import User
-from .serializers import UserSerializer
-from rest_framework import permissions
-from .permissions import IsOwnerOrReadOnly
 
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
@@ -32,19 +29,10 @@ class VulnerabilidadViewSet(viewsets.ModelViewSet):
     """
     queryset = Vulnerabilidad.objects.all()
     serializer_class = VulnerabilidadSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly]
 
     def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+        serializer.save()
 
-
-class UserViewSet(viewsets.ReadOnlyModelViewSet):
-    """
-    This viewset automatically provides `list` and `detail` actions.
-    """
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
 
 class VulnerabilidadListView(ListView):
     model = Vulnerabilidad
@@ -75,7 +63,7 @@ class VulnerabilidadUpdateView(UpdateView):
                 'evolucion_criticas_2', 'evolucion_altas_1', 'evolucion_altas_2', 
                 'evolucion_medias_1', 'evolucion_medias_2', 'evolucion_bajas_1',
                 'evolucion_bajas_2', 'estado_nuevas', 'estado_no_detectadas',
-                'estado_persistentes', 'owner'
+                'estado_persistentes'
                 )
     template_name = 'editar_vulnerabilidad.html'
 

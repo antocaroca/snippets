@@ -1,6 +1,5 @@
 from django.db import models
 from django.forms import ModelForm
-from pygments.formatters.html import HtmlFormatter
 from django.urls import reverse
 
 TIPO_ESCANER = (
@@ -31,7 +30,7 @@ class Vulnerabilidad(models.Model):
     estado_nuevas = models.PositiveIntegerField() 
     estado_no_detectadas = models.PositiveIntegerField() 
     estado_persistentes = models.PositiveIntegerField() 
-    owner = models.ForeignKey('auth.User', related_name='vulnerabilidad', on_delete=models.CASCADE)
+    
 
     class Meta:
         ordering = ['created']

@@ -23,7 +23,7 @@ router.register(r'api-amenazas_del_mes', views.Amenazas_Del_MesViewSet)
 router.register(r'api-alerta_amenaza', views.Alerta_AmenazaViewSet)
 router.register(r'api-tendencia_amenaza', views.Tendencia_AmenazaViewSet)
 router.register(r'api-grafico_lineas_tendencia_amenazas', views.Grafico_Lineas_Tendencia_AmenazasViewSet)
-router.register(r'users', views.UserViewSet)
+
 
 # The API URLs are now determined automatically by the router.
 urlpatterns = [

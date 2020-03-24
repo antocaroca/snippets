@@ -1,6 +1,5 @@
 from django.db import models
 from django.forms import ModelForm
-from pygments.formatters.html import HtmlFormatter
 from django.urls import reverse
 
 ESTADO_AMENAZAS = (
@@ -34,7 +33,6 @@ class Eventos_Del_Mes(models.Model):
     año = models.PositiveSmallIntegerField(blank=True, null=True)
     evento_gestionado = models.PositiveIntegerField(blank=True, null=True)
     evento_no_gestionado = models.PositiveIntegerField(blank=True, null=True)
-    owner = models.ForeignKey('auth.User', related_name='eventos_del_mes', on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['created']
@@ -57,7 +55,6 @@ class Data_Source(models.Model):
     ip = models.GenericIPAddressField(blank=True, null=True)
     mes = models.CharField(choices=MES, max_length=100)
     año = models.PositiveSmallIntegerField(blank=True, null=True)
-    owner = models.ForeignKey('auth.User', related_name='data_source', on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['created']

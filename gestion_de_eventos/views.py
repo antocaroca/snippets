@@ -1,10 +1,8 @@
 from .models import Eventos_Del_Mes, Data_Source
 from .serializers import Eventos_Del_MesSerializer, Data_SourceSerializer
 from rest_framework import generics
-from django.contrib.auth.models import User
-from .serializers import UserSerializer
+
 from rest_framework import permissions
-from .permissions import IsOwnerOrReadOnly
 
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
@@ -35,11 +33,10 @@ class Eventos_Del_MesViewSet(viewsets.ModelViewSet):
     """
     queryset = Eventos_Del_Mes.objects.all()
     serializer_class = Eventos_Del_MesSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly]
+
 
     def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+        serializer.save()
 
 
 class Data_SourceViewSet(viewsets.ModelViewSet):
@@ -50,19 +47,12 @@ class Data_SourceViewSet(viewsets.ModelViewSet):
     """
     queryset = Data_Source.objects.all()
     serializer_class = Data_SourceSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly]
+
 
     def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+        serializer.save()
 
 
-class UserViewSet(viewsets.ReadOnlyModelViewSet):
-    """
-    This viewset automatically provides `list` and `detail` actions.
-    """
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
 
 #############################################################################################
 ###################                       Views                        ######################
@@ -80,7 +70,7 @@ class Eventos_Del_MesCreateView(CreateView):
 class Eventos_Del_MesUpdateView(UpdateView):
     model = Eventos_Del_Mes
     fields = ('evento_n1', 'evento_n2', 'evento_n3', 'evento_pro',
-            'mes', 'año', 'evento_gestionado', 'evento_no_gestionado', 'owner')
+            'mes', 'año', 'evento_gestionado', 'evento_no_gestionado')
     template_name = 'editar_eventos_del_mes.html'
 
     def form_valid(self, form):
@@ -117,7 +107,7 @@ class Data_SourceCreateView(CreateView):
 
 class Data_SourceUpdateView(UpdateView):
     model = Data_Source
-    fields = ( 'owner', 'nombre', 'estado', 'ip', 'mes', 'año')
+    fields = ('nombre', 'estado', 'ip', 'mes', 'año')
     template_name = 'editar_data_source.html'
 
     def form_valid(self, form):

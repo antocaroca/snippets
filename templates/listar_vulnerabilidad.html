@@ -3,8 +3,13 @@
 {% block content %}
 
 <h2 class="p-2">vulnerabilidad list</h2>
-
+<a href="{% url 'vulnerabilidad_crear' %}"><button class="btn btn-info mb-2">Crear vulnerabilidad</button></a>
+</br>
+<hr>
    {% for vulnerabilidad in vulnerabilidad_lista %}
+   <a href="{% url 'vulnerabilidad_editar' vulnerabilidad.pk %}">editar</a> |
+   <a href="{% url 'vulnerabilidad_eliminar' vulnerabilidad.pk %}">eliminar</a>
+</br>
         <a href="{% url 'vulnerabilidad_detalle' vulnerabilidad.pk %}">fecha inicio: {{ vulnerabilidad.fecha_inicio }}</a></br>
         fecha fin: {{ vulnerabilidad.fecha_fin}}</br>
         tipo escaner: {{ vulnerabilidad }}</br>

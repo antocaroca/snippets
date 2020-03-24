@@ -5,4 +5,4 @@ class HallazgoForm(forms.ModelForm):
     
     class Meta: 
         model =  Hallazgo
-        fields = ('codigo', 'nombre_caso', 'criticidad', 'estado_actual', 'fecha_ultima_retroalimentacion', 'mes', 'año', 'owner')
+        fields = ('codigo', 'nombre_caso', 'criticidad', 'estado_actual', 'fecha_ultima_retroalimentacion', 'mes', 'año')

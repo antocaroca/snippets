@@ -19,6 +19,7 @@
         
         <hr>
    {% endfor %}
+
     <h2 class="p-2">alerta amenaza list</h2>
     <a href="{% url 'alerta_amenaza_crear' %}"><button class="btn btn-info mb-2">Crear alerta</button></a>
     </br>
@@ -37,10 +38,10 @@
         {% endif %}
         mes: {{ alerta.mes }}</br>
         año: {{ alerta.año }}</br>
-        
+        <hr>
         
    {% endfor %}
-   <hr>
+   
    <h2 class="p-2">tendencia amenaza list</h2>
    <a href="{% url 'tendencia_amenaza_crear' %}"><button class="btn btn-info mb-2">Crear tendencia</button></a>
    </br>

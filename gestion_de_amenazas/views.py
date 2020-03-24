@@ -2,9 +2,6 @@ from .models import Amenazas_Del_Mes, Alerta_Amenaza, Grafico_Lineas_Tendencia_A
 from .serializers import Amenazas_Del_MesSerializer, Alerta_AmenazaSerializer, Grafico_Lineas_Tendencia_AmenazasSerializer, Tendencia_AmenazaSerializer
 from rest_framework import generics
 from django.contrib.auth.models import User
-from .serializers import UserSerializer
-from rest_framework import permissions
-from .permissions import IsOwnerOrReadOnly
 
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
@@ -36,11 +33,9 @@ class Amenazas_Del_MesViewSet(viewsets.ModelViewSet):
     """
     queryset = Amenazas_Del_Mes.objects.all()
     serializer_class = Amenazas_Del_MesSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly]
 
     def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+        serializer.save()
 
 
 class Alerta_AmenazaViewSet(viewsets.ModelViewSet):
@@ -51,11 +46,9 @@ class Alerta_AmenazaViewSet(viewsets.ModelViewSet):
     """
     queryset = Alerta_Amenaza.objects.all()
     serializer_class = Alerta_AmenazaSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly]
 
     def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+        serializer.save()
 
 class Grafico_Lineas_Tendencia_AmenazasViewSet(viewsets.ModelViewSet):
     """
@@ -65,11 +58,9 @@ class Grafico_Lineas_Tendencia_AmenazasViewSet(viewsets.ModelViewSet):
     """
     queryset = Grafico_Lineas_Tendencia_Amenazas.objects.all()
     serializer_class = Grafico_Lineas_Tendencia_AmenazasSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly]
 
     def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+        serializer.save()
 
 class Tendencia_AmenazaViewSet(viewsets.ModelViewSet):
     """
@@ -79,18 +70,11 @@ class Tendencia_AmenazaViewSet(viewsets.ModelViewSet):
     """
     queryset = Tendencia_Amenaza.objects.all()
     serializer_class = Tendencia_AmenazaSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly]
 
     def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+        serializer.save()
 
-class UserViewSet(viewsets.ReadOnlyModelViewSet):
-    """
-    This viewset automatically provides `list` and `detail` actions.
-    """
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+
 
 #############################################################################################
 ###################                       Views                        ######################
@@ -109,7 +93,7 @@ class Amenazas_Del_MesCreateView(CreateView):
 
 class Amenazas_Del_MesUpdateView(UpdateView):
     model = Amenazas_Del_Mes
-    fields = ('categoria', 'criticidad', 'tipo', 'cantidad', 'mes', 'año', 'owner')
+    fields = ('categoria', 'criticidad', 'tipo', 'cantidad', 'mes', 'año')
     template_name = 'editar_amenazas_del_mes.html'
 
     def form_valid(self, form):
@@ -151,7 +135,7 @@ class Alerta_AmenazaCreateView(CreateView):
 
 class Alerta_AmenazaUpdateView(UpdateView):
     model = Alerta_Amenaza
-    fields = ('categoria', 'criticidad', 'descripcion', 'icono', 'mes', 'año', 'owner')
+    fields = ('categoria', 'criticidad', 'descripcion', 'icono', 'mes', 'año')
     template_name = 'editar_alerta_amenaza.html'
 
     def form_valid(self, form):
@@ -175,7 +159,7 @@ class Tendencia_AmenazaCreateView(CreateView):
 
 class Tendencia_AmenazaUpdateView(UpdateView):
     model = Tendencia_Amenaza
-    fields = ('titulo', 'descripcion_1', 'descripcion_2', 'descripcion_3', 'imagen_1', 'imagen_2', 'imagen_3', 'mes', 'año', 'owner')
+    fields = ('titulo', 'descripcion_1', 'descripcion_2', 'descripcion_3', 'imagen_1', 'imagen_2', 'imagen_3', 'mes', 'año')
     template_name = 'editar_tendencia_amenaza.html'
 
     def form_valid(self, form):
@@ -199,7 +183,7 @@ class Grafico_Lineas_Tendencia_AmenazasCreateView(CreateView):
 
 class Grafico_Lineas_Tendencia_AmenazasUpdateView(UpdateView):
     model = Grafico_Lineas_Tendencia_Amenazas
-    fields = ('titulo', 'escala', 'indicador', 'puntos', 'mes', 'año', 'owner')
+    fields = ('titulo', 'escala', 'indicador', 'puntos', 'mes', 'año')
     template_name = 'editar_grafico_lineas_tendencia_amenaza.html'
 
     def form_valid(self, form):

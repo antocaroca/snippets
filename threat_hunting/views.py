@@ -2,9 +2,6 @@ from .models import Hallazgo
 from .serializers import HallazgoSerializer
 from rest_framework import generics
 from django.contrib.auth.models import User
-from .serializers import UserSerializer
-from rest_framework import permissions
-from .permissions import IsOwnerOrReadOnly
 
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
@@ -33,19 +30,11 @@ class HallazgoViewSet(viewsets.ModelViewSet):
     """
     queryset = Hallazgo.objects.all()
     serializer_class = HallazgoSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly]
+    
 
     def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+        serializer.save()
 
-
-class UserViewSet(viewsets.ReadOnlyModelViewSet):
-    """
-    This viewset automatically provides `list` and `detail` actions.
-    """
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
 
 ###################################    views    #####################################
 
@@ -60,7 +49,7 @@ class HallazgoCreateView(CreateView):
 
 class HallazgoUpdateView(UpdateView):
     model = Hallazgo
-    fields = ('codigo', 'nombre_caso', 'criticidad', 'estado_actual', 'fecha_ultima_retroalimentacion', 'mes', 'año', 'owner')
+    fields = ('codigo', 'nombre_caso', 'criticidad', 'estado_actual', 'fecha_ultima_retroalimentacion', 'mes', 'año')
     template_name = 'editar_hallazgo.html'
 
     def form_valid(self, form):

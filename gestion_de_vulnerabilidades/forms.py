@@ -13,5 +13,5 @@ class VulnerabilidadForm(forms.ModelForm):
                 'evolucion_criticas_2', 'evolucion_altas_1', 'evolucion_altas_2', 
                 'evolucion_medias_1', 'evolucion_medias_2', 'evolucion_bajas_1',
                 'evolucion_bajas_2', 'estado_nuevas', 'estado_no_detectadas',
-                'estado_persistentes', 'owner'
+                'estado_persistentes'
                 )

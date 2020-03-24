@@ -15,7 +15,7 @@ from .views import(
 router = DefaultRouter()
 router.register(r'api-eventos_del_mes', views.Eventos_Del_MesViewSet)
 router.register(r'data_source', views.Data_SourceViewSet)
-router.register(r'users', views.UserViewSet)
+
 
 # The API URLs are now determined automatically by the router.
 urlpatterns = [

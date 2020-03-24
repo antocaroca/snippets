@@ -1,6 +1,5 @@
 from django.db import models
 from django.forms import ModelForm
-from pygments.formatters.html import HtmlFormatter
 from django.urls import reverse
 
 CATEGORIA_AMENAZAS = (
@@ -47,7 +46,7 @@ class Amenazas_Del_Mes(models.Model):
     cantidad = models.PositiveIntegerField(blank=True, null=True)
     mes = models.CharField(choices=MES, max_length=100)
     año = models.PositiveSmallIntegerField(blank=True, null=True)
-    owner = models.ForeignKey('auth.User', related_name='amenazas_del_mes', on_delete=models.CASCADE)
+    
 
     class Meta:
         ordering = ['created']
@@ -71,7 +70,6 @@ class Alerta_Amenaza(models.Model):
     icono =  models.ImageField(upload_to='gestion_de_amenazas/alerta_amenaza/', null=True, blank=True)
     mes = models.CharField(choices=MES, max_length=100)
     año = models.PositiveSmallIntegerField(blank=True, null=True)
-    owner = models.ForeignKey('auth.User', related_name='alerta_amenaza', on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['created']
@@ -100,7 +98,6 @@ class Tendencia_Amenaza(models.Model):
     imagen_3 =  models.ImageField(upload_to='gestion_de_amenazas/tendencia_amenaza/', null=True, blank=True)
     mes = models.CharField(choices=MES, max_length=100)
     año = models.PositiveSmallIntegerField(blank=True, null=True)
-    owner = models.ForeignKey('auth.User', related_name='tendencia_Amenaza', on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['created']
@@ -128,7 +125,7 @@ class Grafico_Lineas_Tendencia_Amenazas(models.Model):
     puntos = models.PositiveIntegerField(blank=True, null=True)
     mes = models.CharField(choices=MES, max_length=100)
     año = models.PositiveSmallIntegerField(blank=True, null=True)
-    owner = models.ForeignKey('auth.User', related_name='Grafico_lineas_tendencia_amenazas', on_delete=models.CASCADE)
+    
 
     class Meta:
         ordering = ['created']

@@ -1,6 +1,5 @@
 from django.db import models
 from django.forms import ModelForm
-from pygments.formatters.html import HtmlFormatter
 from django.urls import reverse
 
 CRITICIDAD_AMENAZAS = (
@@ -40,7 +39,7 @@ class Hallazgo(models.Model):
     fecha_ultima_retroalimentacion = models.DateField()
     mes = models.CharField(choices=MES, max_length=100)
     año = models.PositiveSmallIntegerField(blank=True, null=True)
-    owner = models.ForeignKey('auth.User', related_name='hallazgo', on_delete=models.CASCADE)
+    
 
     class Meta:
         ordering = ['created']
